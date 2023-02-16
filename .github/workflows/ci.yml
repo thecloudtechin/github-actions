@@ -16,7 +16,7 @@ on:
         default: 'develop-env'
       terraform:
         type: choice
-        description: 'Select Method'
+        description: 'Select Terraform Action'
         options:
           - apply
           - destroy
@@ -25,6 +25,10 @@ on:
       tenant-id:
         type: string
         description: 'Enter Tenant Id'
+        required: true
+      sns-topic-arn:
+        type: string
+        description: 'Enter SNS Topic ARN'
         required: true
 jobs:
 
