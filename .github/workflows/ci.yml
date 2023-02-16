@@ -1,6 +1,15 @@
 name: Terraform Manual Workflow
 on:
   workflow_dispatch:
+    inputs:
+      env:
+        type: choice
+        description: 'Select Environment'
+        options:
+        - prod-env
+        - develop-env
+        required: true
+
 jobs:
   terraform:
     name: 'terraform'
