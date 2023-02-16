@@ -9,6 +9,10 @@ data "aws_sns_topic" "existing_data" {
 
 }
 
+output "sns-topic-list" {
+  value = aws_sns_topic.sns-topic.*.arn
+}
+
 
 resource "aws_cloudwatch_event_target" "sns" {
 #  for_each  = var.eventbridge_cron_aws_cloudwatch_event_target
@@ -25,7 +29,7 @@ resource "aws_cloudwatch_event_target" "sns" {
   JSON
 }
 
-# resource "aws_sns_topic" "sns-topic" {
-#   count = length(var.sns_topics)
-#   name = var.sns_topics[count.index]
-# }
+ resource "aws_sns_topic" "sns-topic" {
+   count = length(var.sns_topics)
+   name = var.sns_topics[count.index]
+ }
