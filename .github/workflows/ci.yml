@@ -39,10 +39,22 @@ jobs:
         echo "Env: ${{ github.event.inputs.env }}" 
         echo "Terraform Action is: ${{ github.event.inputs.terraform }}"
     - name: applying
-      if: ${{ github.event.inputs.terraform }} == 'prod-env' 
+      # if: ${{ github.event.inputs.terraform }} == 'prod-env' 
       run: terraform init
     - name: Print Tenant Id
       run: |
         echo "Tenant Id: ${{ github.event.inputs.tenant-id}}"
-        sudo  apt update 
-        sudo  apt install awscli -y
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Configure AWS CLI
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+    - name: create sns-topic
+      run: |
+        aws sns create-topic --name outbox-topic-${{ github.event.inputs.tenant-id}}
+        aws sns list-topics
+      
