@@ -49,15 +49,10 @@ jobs:
     - name: Print Tenant Id
       run: |
         echo "Tenant Id: ${{ github.event.inputs.tenant-id}}"
-<<<<<<< HEAD
     - name: Terraform apply
       run: cd infra  && terraform ${{ github.event.inputs.terraform}} -auto-approve
 
 
-=======
-    - name: Checkout Code
-      uses: actions/checkout@v2
->>>>>>> parent of 3459873 (commit 18)
 
     # - name: Configure AWS CLI
     #   uses: aws-actions/configure-aws-credentials@v1
