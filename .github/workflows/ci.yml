@@ -26,10 +26,10 @@ on:
         type: string
         description: 'Enter Tenant Id'
         required: true
-      sns-topic-arn:
-        type: string
-        description: 'Enter SNS Topic ARN'
-        required: true
+#      sns-topic-arn:
+#        type: string
+#        description: 'Enter SNS Topic ARN'
+#        required: true
 jobs:
 
   infrastructure-setup:
