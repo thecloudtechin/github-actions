@@ -5,12 +5,13 @@ on:
       inputs:
         user_input:
           type: choice
-          description: Select Environment 
-          required: true
+          description: 'Select Environment' 
           options:
-            - dev
-            - stage
-            -prod
+          - dev
+          - stage
+          - prod
+          required: true
+          defaults: dev
 jobs:
   terraform:
     name: 'terraform'
