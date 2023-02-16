@@ -1,4 +1,4 @@
-variable "eventbridge_cron_aws_cloudwatch_event_target" {}
+# variable "eventbridge_cron_aws_cloudwatch_event_target" {}
 variable "environment" {
   default = "prod-env"
 }
