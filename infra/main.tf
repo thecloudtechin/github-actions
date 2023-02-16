@@ -16,10 +16,10 @@ output "sns-topic-list" {
 
 resource "aws_cloudwatch_event_target" "sns" {
 #  for_each  = var.eventbridge_cron_aws_cloudwatch_event_target
-  count = length(data.aws_sns_topic.existing_data)
+#  count = length(var.sns_topics)
   rule      = aws_cloudwatch_event_rule.console.name
-  target_id = data.aws_sns_topic.existing_data[count.index].id
-  arn       = data.aws_sns_topic.existing_data[count.index].arn
+  target_id = aws_sns_topic.sns-topic.id
+  arn       = aws_sns_topic.sns-topic.arn
   input     = <<JSON
   {
     "TenantId":"",
