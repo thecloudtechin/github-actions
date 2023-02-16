@@ -42,6 +42,8 @@ jobs:
       - name: Replace Tenant id main.tf
         run: |
           cd infra && sed -i 's/\(TenantId\s*=\s*\)"[^"]*"/\1"${{github.event.inputs.tenant-id}}"/g' main.tf
+      - name: Print Main.tf file
+        run: cd infra && cat main.tf
       - name: Run terraform init in terraform dir
         run: cd infra && terraform init
       - name: Print User Deployment Selection
