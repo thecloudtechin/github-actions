@@ -4,8 +4,8 @@ resource "aws_cloudwatch_event_rule" "console" {
 
   schedule_expression = "rate(5 minutes)"
 }
-data "aws_sns_topic" "existing_data" {
-  name = "outbox-topic"
+#data "aws_sns_topic" "existing_data" {
+#  name = "outbox-topic"
 
 }
 
