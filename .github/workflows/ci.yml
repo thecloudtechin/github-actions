@@ -18,6 +18,10 @@ on:
           - destroy
         required: true
         default: 'apply'
+      tenant-id:
+        type: string
+        description: 'Enter Tenant Id'
+        required: true
 
 jobs:
   terraform:
@@ -34,6 +38,11 @@ jobs:
       run: |
         echo "Env: ${{ github.event.inputs.env }}" 
         echo "Terraform Action is: ${{ github.event.inputs.terraform }}"
-      if: ${{ github.event.inputs.terraform }} == 'prod-env'
     - name: applying
+      if: ${{ github.event.inputs.terraform }} == 'prod-env' 
       run: terraform init
+    - name: Print Tenant Id
+      run: |
+        echo "Tenant Id: ${{ github.event.inputs.tenant-id}}"
+        sudo  apt update 
+        sudo  apt install awscli -y
