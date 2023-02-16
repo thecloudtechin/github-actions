@@ -9,27 +9,24 @@ data "aws_sns_topic" "existing_data" {
 
 }
 
-output "sns-topic-list" {
-  value = aws_sns_topic.sns-topic.*.arn
-}
+
 
 
 resource "aws_cloudwatch_event_target" "sns" {
-#  for_each  = var.eventbridge_cron_aws_cloudwatch_event_target
-  count = length(var.sns_topics)
+  for_each  = var.eventbridge_cron_aws_cloudwatch_event_target
   rule      = aws_cloudwatch_event_rule.console.name
-  target_id = aws_sns_topic.sns-topic.id
-  arn       = aws_sns_topic.sns-topic.arn
+  target_id = each.key
+  arn       = each.value.arn
   input     = <<JSON
   {
-    "TenantId":"",
+    "TenantId":"${each.value.tenant_id}",
     "Type":"PKI.Evoya.Shared.Domain.Messages.PurgeOutboxMessage",
-    "CorrelationId":"13ef5142-27fa-4f8e-9934-85a364a5457a"
+    "CorrelationId":"${each.value.correlation_id}"
   }
   JSON
 }
 
- resource "aws_sns_topic" "sns-topic" {
-#   count = length(var.sns_topics)
-   name = var.sns_topics
- }
+# resource "aws_sns_topic" "sns-topic" {
+##   count = length(var.sns_topics)
+#   name = var.sns_topics
+# }
