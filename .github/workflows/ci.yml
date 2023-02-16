@@ -26,10 +26,10 @@ jobs:
       uses: actions/checkout@v3
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2 
-      if: ${{ github.events.env.inputs == 'prod-env'}}
+      if: ${{ github.events.inputs.env == 'prod-env'}}
     - name: Create Directory
       run: |
         mkdir -p datadog 
         cd datadog 
-        echo  'user selected'${{ github.events.env.inputs }} 
+        echo  'user selected'${{ github.events.inputs.env }} 
         # cat a.txt
