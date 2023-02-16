@@ -39,12 +39,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v1
+      - name: Replace Tenant id main.tf
+        run: |
+          cd infra && sed -i 's/\(TenantId\s*=\s*\)"[^"]*"/\1"${{github.event.inputs.tenant-id}}"/g' main.tf
       - name: Run terraform init in terraform dir
         run: cd infra && terraform init
       - name: Print User Deployment Selection
         run: |
           echo "Environment: ${{github.event.inputs.deployment}}"
           echo "Tenant Id: ${{github.event.inputs.tenant-id}}"
+      
 
       - name: Terraform apply
         run: cd infra && terraform ${{github.event.inputs.terraform}} -auto-approve

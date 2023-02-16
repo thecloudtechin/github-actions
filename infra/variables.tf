@@ -9,24 +9,28 @@ variable "sns_topics" {
 variable "eventbridge_cron_aws_cloudwatch_event_target" {
   default = {
     "ycOjpWOkTfrrnVlr" = {
-      arn            = "arn:aws:sns:eu-central-1:874901147556:outbox-topic-alpha"
-      tenant_id      = "ycOjpWOkTfrrnVlr"
+      arn            = ""
+#      tenant_id      = "ycOjpWOkTfrrnVlr"
       correlation_id = "13ef5142-27fa-4f8e-9934-85a364a5457a"
-    },
+     },
     "DQJyL2QA6PVDEWyd" = {
-      arn            = "arn:aws:sns:eu-central-1:874901147556:outbox-topic-alpha"
-      tenant_id      = "DQJyL2QA6PVDEWyd"
+      arn            = ""
+#      tenant_id      = "DQJyL2QA6PVDEWyd"
       correlation_id = "13ef5142-27fa-4f8e-9934-85a364a5457a"
     },
     "TkSzKFML1hPBqNfX" = {
-      arn            = "arn:aws:sns:eu-central-1:874901147556:outbox-topic-alpha"
-      tenant_id      = "TkSzKFML1hPBqNfX"
+      arn            = ""
+#      tenant_id      = "TkSzKFML1hPBqNfX"
       correlation_id = "13ef5142-27fa-4f8e-9934-85a364a5457a"
     },
     "yqbaTsmOI7b3TNwa" = {
-      arn            = "arn:aws:sns:eu-central-1:874901147556:outbox-topic-alpha"
-      tenant_id      = "yqbaTsmOI7b3TNwa"
+      arn            = ""
+#      tenant_id      = "yqbaTsmOI7b3TNwa"
       correlation_id = "13ef5142-27fa-4f8e-9934-85a364a5457a"
     }
   }
+}
+
+variable "tenant_id" {
+  type = string
 }

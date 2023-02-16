@@ -4,19 +4,23 @@ resource "aws_cloudwatch_event_rule" "console" {
 
   schedule_expression = "rate(5 minutes)"
 }
+data "aws_sns_topic" "existing_data" {
+  name = "outbox-topic"
 
+}
 
 
 resource "aws_cloudwatch_event_target" "sns" {
-  for_each  = var.eventbridge_cron_aws_cloudwatch_event_target
+#  for_each  = var.eventbridge_cron_aws_cloudwatch_event_target
+  count = length(data.aws_sns_topic.existing_data)
   rule      = aws_cloudwatch_event_rule.console.name
-  target_id = each.key
-  arn       = each.value.arn
+  target_id = data.aws_sns_topic.existing_data[count.index].id
+  arn       = data.aws_sns_topic.existing_data[count.index].id
   input     = <<JSON
   {
-    "TenantId":"${each.value.tenant_id}",
+    "TenantId":"",
     "Type":"PKI.Evoya.Shared.Domain.Messages.PurgeOutboxMessage",
-    "CorrelationId":"${each.value.correlation_id}"
+    "CorrelationId":"13ef5142-27fa-4f8e-9934-85a364a5457a"
   } 
   JSON
 }
