@@ -30,6 +30,10 @@ jobs:
       uses: hashicorp/setup-terraform@v2 
       # if: ${{ github.events.inputs.env == 'prod-env'}}
     - name: Print User Selection
+      id: selection
       run: |
         echo "Env: ${{ github.event.inputs.env }}" 
         echo "Terraform Action is: ${{ github.event.inputs.terraform }}"
+      if: ${{ github.event.inputs.terraform }} == 'prod-env'
+    - name: applying
+      run: terraform init
