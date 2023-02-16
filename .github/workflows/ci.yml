@@ -4,9 +4,13 @@ on:
     env:
       inputs:
         user_input:
-          type: text
-          description: Enter SNS Topic Name
+          type: choice
+          description: Select Environment 
           required: true
+          options:
+            - dev
+            - stage
+            -prod
 jobs:
   terraform:
     name: 'terraform'
