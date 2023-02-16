@@ -9,12 +9,27 @@ on:
         - prod-env
         - develop-env
         required: true
+      terraform:
+        type: choice
+        description: 'Select Method'
+        options:
+          - apply
+          - destroy
+        required: true
 
 jobs:
   terraform:
     name: 'terraform'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - run: ls -l 
-      - run: echo 'hello world'
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3  
+    - name: Create Directory
+      run: |
+        mkdir -p datadog \
+        cd datadog && echo  'hello' EOF > a.txt \
+        cat a.txt
+
+    
