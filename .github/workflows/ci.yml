@@ -1,4 +1,6 @@
 name: Terraform Manual Workflow
+env:
+  AWS_REGION: ap-south-1
 on:
   workflow_dispatch:
     inputs:
