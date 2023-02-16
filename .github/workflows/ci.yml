@@ -28,8 +28,6 @@ jobs:
       uses: hashicorp/setup-terraform@v2 
     - name: Create Directory
       run: |
-        mkdir -p datadog \
-        cd datadog && echo  'hello' EOF > a.txt \
-        cat a.txt
+        mkdir -p datadog && cd datadog && echo  'hello' EOF > a.txt && cat a.txt
 
     
