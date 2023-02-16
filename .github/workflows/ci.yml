@@ -30,7 +30,7 @@ jobs:
   terraform:
     name: 'terraform'
     runs-on: ubuntu-latest
-    environment: prod-env
+    environment: ${{github.event.inputs.env}}
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -50,6 +50,10 @@ jobs:
         echo "Tenant Id: ${{ github.event.inputs.tenant-id}}"
     - name: Checkout Code
       uses: actions/checkout@v2
+    - name: Terraform apply
+      run: cd terraform && terraform ${{ github.event.inputs.terraform}} -auto-approve
+
+
 
     - name: Configure AWS CLI
       uses: aws-actions/configure-aws-credentials@v1
