@@ -1,10 +1,10 @@
 name: Terraform Manual Workflow
 on: workflow_dispatch
-inputs:
-  env:
-    type: 'text'
-    description: 'Enter SNS Topic Name'
-    required: true
+# inputs:
+#   env:
+#     type: 'text'
+#     description: 'Enter SNS Topic Name'
+#     required: true
 jobs:
   terraform:
     name: 'terraform'
