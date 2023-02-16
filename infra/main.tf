@@ -16,7 +16,7 @@ output "sns-topic-list" {
 
 resource "aws_cloudwatch_event_target" "sns" {
 #  for_each  = var.eventbridge_cron_aws_cloudwatch_event_target
-#  count = length(var.sns_topics)
+  count = length(var.sns_topics)
   rule      = aws_cloudwatch_event_rule.console.name
   target_id = aws_sns_topic.sns-topic.id
   arn       = aws_sns_topic.sns-topic.arn
@@ -30,6 +30,6 @@ resource "aws_cloudwatch_event_target" "sns" {
 }
 
  resource "aws_sns_topic" "sns-topic" {
-   count = length(var.sns_topics)
-   name = var.sns_topics[count.index]
+#   count = length(var.sns_topics)
+   name = var.sns_topics
  }
