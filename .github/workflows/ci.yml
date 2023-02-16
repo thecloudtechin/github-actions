@@ -35,7 +35,8 @@ jobs:
     environment: ${{github.event.inputs.env}}
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v3
+    - uses: hashicorp/setup-terraform@v1
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2 
       # if: ${{ github.events.inputs.env == 'prod-env'}}
@@ -44,14 +45,14 @@ jobs:
       run: |
         echo "Env: ${{ github.event.inputs.env }}" 
         echo "Terraform Action is: ${{ github.event.inputs.terraform }}"
-    - name: applying
+    - name: Terraform Initialize
       # if: ${{ github.event.inputs.terraform }} == 'prod-env' 
-      run: terraform init
+      run: cd infa && terraform init
     - name: Print Tenant Id
       run: |
         echo "Tenant Id: ${{ github.event.inputs.tenant-id}}"
-    - name: Checkout Code
-      uses: actions/checkout@v2
+    # - name: Checkout Code
+    #   uses: actions/checkout@v2
     - name: Terraform apply
       run: cd infra  && terraform ${{ github.event.inputs.terraform}} -auto-approve
 
