@@ -31,5 +31,5 @@ jobs:
       run: |
         mkdir -p datadog 
         cd datadog 
-        echo  'user selected ${{ github.events.env.inputs }}' 
-        cat a.txt
+        echo  'user selected'${{ github.events.env.inputs }} 
+        # cat a.txt
