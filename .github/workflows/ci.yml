@@ -1,0 +1,14 @@
+name: Terraform Manual Workflow
+on: workflow_dispatch
+inputs:
+  env:
+    type: 'text'
+    description: 'Enter SNS Topic Name'
+    required: true
+jobs:
+  terraform:
+    name: 'terraform'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: ls -l
