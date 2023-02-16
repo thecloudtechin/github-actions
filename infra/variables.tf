@@ -31,6 +31,6 @@ variable "eventbridge_cron_aws_cloudwatch_event_target" {
   }
 }
 
-variable "tenant_id" {
-  type = string
-}
+#variable "tenant_id" {
+#  type = string
+#}
