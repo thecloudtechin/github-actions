@@ -52,7 +52,7 @@ jobs:
           echo "Tenant Id: ${{github.event.inputs.tenant-id}}"
       
 
-      - name: Terraform apply
+      - name: Terraform ${{github.event.inputs.terraform}}
         run: cd infra && terraform ${{github.event.inputs.terraform}} -auto-approve
 
 
