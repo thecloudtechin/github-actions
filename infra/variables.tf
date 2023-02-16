@@ -1,5 +1,7 @@
 variable "eventbridge_cron_aws_cloudwatch_event_target" {}
-variable "environment" {}
+variable "environment" {
+  default = 'prod-env'
+}
 variable "sns_topics" {
   type = any
   default = ["patient-topic-config", "patient-linking-topic-config", "screening-topic-config", "evoyareport-topic-config", "event-history-topic-config", "outbox-topic-config"]
