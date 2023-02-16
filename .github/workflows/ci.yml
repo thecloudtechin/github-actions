@@ -6,7 +6,7 @@ env:
 on:
   workflow_dispatch:
     inputs:
-      env:
+      deployment:
         type: choice
         description: 'Select Environment'
         options:
@@ -26,31 +26,28 @@ on:
         type: string
         description: 'Enter Tenant Id'
         required: true
-
 jobs:
 
-  terraform:
-    name: 'terraform'
+  infrastructure-setup:
+    name: building the cloud infra
     runs-on: ubuntu-latest
-    environment: prod-env
+    environment: ${{github.event.inputs.deployment}}
     steps:
-    - name: Checkout
-    - uses: actions/checkout@v3
-    # - uses: hashicorp/setup-terraform@v1
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v2 
-    - name: Terraform Initialize
-      run: cd infa && terraform init
-    - name: Print User Selection
-      # id: selection
-      run: |
-        echo "Env: ${{ github.event.inputs.env }}" 
-        echo "Terraform Action is: ${{ github.event.inputs.terraform }}"
-    - name: Print Tenant Id
-      run: |
-        echo "Tenant Id: ${{ github.event.inputs.tenant-id}}"
-    - name: Terraform apply
-      run: cd infra  && terraform ${{ github.event.inputs.terraform}} -auto-approve
+      - uses: actions/checkout@v3
+      - uses: hashicorp/setup-terraform@v1
+      - name: Run terraform init in terraform dir
+        run: cd terraform && terraform init
+      - name: Print User Deployment Selection
+        run: |
+          echo "Environment: ${{github.event.inputs.deployment}}"
+          echo "Tenant Id: ${{github.event.inputs.tenant-id}}"
+
+      - name: Terraform apply
+        run: cd infra && terraform ${{github.event.inputs.terraform}} -auto-approve
+
+
+
+ 
 
 
 
