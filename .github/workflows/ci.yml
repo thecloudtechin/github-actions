@@ -40,8 +40,9 @@ jobs:
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v1
       - name: Replace Tenant id main.tf
-        run: |
-          echo 'variable  "tenant_id"  { ${{github.event.inputs.tenant-id}}} > infra/tenant.tf' && cat infra/tenant.tf
+        run: | 
+          cd infra
+          echo 'variable  "tenant_id"  { ${{github.event.inputs.tenant-id}}} > tenant.tf' && cat tenant.tf
       - name: Print Main.tf file
         run: cd infra && cat main.tf
       - name: Run terraform init in terraform dir
