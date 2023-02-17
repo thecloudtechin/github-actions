@@ -42,7 +42,7 @@ jobs:
       - name: Replace Tenant id main.tf
         run: | 
           cd infra
-          echo 'variable  "tenant_id"  { ${{github.event.inputs.tenant-id}}} > tenant.tf' && cat tenant.tf
+          echo 'variable  "tenant_id"  { ${{github.event.inputs.tenant-id}} } > tenant.tf' && pwd && ls -l
       - name: Print Main.tf file
         run: cd infra && cat main.tf
       - name: Run terraform init in terraform dir
