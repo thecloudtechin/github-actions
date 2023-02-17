@@ -41,7 +41,7 @@ jobs:
       - uses: hashicorp/setup-terraform@v1
       - name: Replace Tenant id main.tf
         run: |
-          cd infra && sed -i 's/\(TenantId\s*=\s*\)"[^"]*"/\1"${{github.event.inputs.tenant-id}}"/g' main.tf
+          echo 'variable  "tenant_id"  { ${{github.event.inputs.tenant-id}}} > infra/tenant.tf' && cat infra/tenant.tf
       - name: Print Main.tf file
         run: cd infra && cat main.tf
       - name: Run terraform init in terraform dir
