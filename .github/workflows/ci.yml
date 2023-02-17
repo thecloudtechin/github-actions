@@ -41,8 +41,8 @@ jobs:
       - uses: hashicorp/setup-terraform@v1
       - name: Insert tenant_id in tenant.tf file
         run: | 
-          cd infra
-          echo 'variable  "tenant_id"  { ${{github.event.inputs.tenant-id}} } > tenant.tf' && pwd && ls -l
+          
+          echo 'variable  "tenant_id"  { ${{github.event.inputs.tenant-id}} } > ../infra/tenant.tf' &&  cd ../infra/ && cat tenant.tf
       - name: Print Main.tf file
         run: cd infra && cat main.tf
       - name: Run terraform init in terraform dir
